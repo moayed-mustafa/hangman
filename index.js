@@ -1,7 +1,8 @@
 
+// * SElect DOM elements
     const word = document.getElementById('word');
 
-    const wrongLetters = document.getElementById('wrong-letters');
+    const wrongLettersDiv = document.getElementById('wrong-letters');
 
     const playAgain= document.getElementById('play-button');
 
@@ -13,8 +14,9 @@
 
     const figureParts = document.querySelectorAll('.figure-part');
 
-// get the words
     const url = 'https://random-word-api.herokuapp.com/'
+        //* */ get the words
+
     const res = axios.get(`${url}/word?number=10`)
         .then(function (resolve, reject) {
             let wordsArray = resolve.data;
@@ -23,10 +25,9 @@
             let selectedWord = wordsArray[Math.floor(Math.random() * wordsArray.length)]
             const wrongLetters = [];
             const correctLetters = [];
-            // ! *****
             console.log(selectedWord) // ! *****
-            // ! *****
-            // show the words
+            //*  */ show the words
+            // ! #####################################
             function displayWord() {
                 word.innerHTML = `
                 ${selectedWord.split("").map(letter =>
@@ -42,21 +43,44 @@
                     popUP.style.display = 'flex'
                 }
             }
+            // ! #####################################
 
             // * show the notification
             function showNotification() {
                 notification.classList.add('show');
                 setTimeout(() => {notification.classList.remove('show')}, 2000)
             }
-
+            // ! #####################################
+            // * update wrongLetters
             function updateWrongLetters() {
+                wrongLettersDiv.innerHTML = `
+                    ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+                    ${wrongLetters.map(letter => `<span>${letter}</span>`)}
+                `
+
+                // show the parts
+                figureParts.forEach((part, index) => {
+                    errors = wrongLetters.length;
+                    if (index < errors) {
+                        part.style.display = 'block'
+                    } else {
+                        part.style.display = 'none';
+                    }
+                });
+
+                // losing condition
+                if (wrongLetters.length === figureParts.length) {
+                    finalMessage.innerText = 'You have Lost! 😆'
+                    popUP.style.display = 'flex'
+
+                }
+
 
             }
-            // * this needs to happen only on click
-           // * listen for letters
+            //
+           // * listen for letters press
             window.addEventListener('keydown', function (e) {
                 if (e.keyCode >= 65 && e.keyCode <= 90) {
-                    console.log(e.key)
                     // displayWord if the letter is in the selected word
                     if (selectedWord.includes(e.key)) {
                         if (!correctLetters.includes(e.key)) {
@@ -70,8 +94,10 @@
                             wrongLetters.push(e.key);
                             updateWrongLetters();
 
+
                         } else {
                             showNotification();
+
                         }
                     }
 
@@ -81,8 +107,12 @@
 
 
 
+            // ! #####################################
+            // * refresh the page
+            playAgain.addEventListener('click', function () {
+                window.location.reload();
+            })
         });
-// program = [p,r,o,g,r,a,m]
 
 
 

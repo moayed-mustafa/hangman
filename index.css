@@ -38,12 +38,16 @@ h1, p{
     position:absolute;
     top:20px;
     right:20px;
+    /* border: solid white 2px; */
+    box-sizing: border-box;
+    flex-wrap: wrap;
 }
 .wrong-letter-container p{
-    font-size:200%
+    font-size:125%;
+    align-self: right;
 }
 .wrong-letter-container span{
-    font-size:150%;
+    font-size:100%;
     color:brown;
 }
 .word{
