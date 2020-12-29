@@ -1,0 +1,116 @@
+*{
+    box-sizing: border-box;
+    padding:10px;
+    overflow:hidden;
+}
+body{
+    background: #b9a3a3;
+    color: #ffffff;
+    font-family: Bangers;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100vw
+
+}
+
+h1, p{
+    font-weight: bolder;
+    margin: 10px 0 0;
+}
+
+.game-container{
+    border: solid white 2px;
+    position:relative;
+    height: 350px;
+    width:450px;
+}
+.figure-container{
+    fill:transparent;
+    stroke: #fff;
+    stroke-width: 5px;
+    stroke-linecap: round;
+}
+.figure-part{
+    display:none;
+}
+.wrong-letter-container{
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+.wrong-letter-container p{
+    font-size:200%
+}
+.wrong-letter-container span{
+    font-size:150%;
+    color:brown;
+}
+.word{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    border-top: solid brown 2px;
+    font-size: 200%;
+    color:brown;
+    /* position: absolute; */
+
+}
+.letter{
+    border-bottom: solid white 2px;
+
+}
+.popup-container{
+    /* margin-top: 10px; */
+    /* border: solid brown 2px; */
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    /* display: flex; */
+    display:none;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+
+}
+.popup{
+border: solid brown 2px;
+background-color: #db7473;
+border-radius:5px;
+padding:15px;
+text-align:center;
+width:20%;
+}
+#play-button{
+    max-width:100px;
+    cursor:pointer;
+    color:#db7473;
+    font-weight: bold;
+    margin-top:20px;
+    padding: 12px 20px;
+}
+ #play-button:active{
+    transform: scale(0.95);
+}
+#play-button:focus{
+    outline: 0;
+}
+
+.notification-container{
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px 10px 0 0;
+    padding: 15px 20px;
+    position: absolute;
+    bottom: -50px;
+    transition: 0.4s ease-in-out;
+
+}
+.notification-container p{
+    margin: 0;
+}
+.notification-container.show{
+    transform: translateY(-50px);
+}
